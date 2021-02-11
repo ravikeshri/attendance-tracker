@@ -1,0 +1,94 @@
+html {
+    height: 100%;
+}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #434068;
+    height: 100%;
+    padding: 3%;
+    box-sizing: border-box;
+}
+
+/*
+#######    Login and Register   #######
+*/
+
+.container-box {
+    display: flex;
+    width: 80%;
+    height: 100%; 
+    margin: 0 auto;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 6px 9px 51px 3px rgb(56, 55, 56);
+    -moz-box-shadow: 6px 9px 51px 3px rgb(59, 58, 59);
+    box-shadow: 6px 9px 51px 3px rgb(54, 53, 54);
+}
+
+.left-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    height: 100%;
+    padding: 40px;
+    font-size: 50px;
+    color: white;
+    background-color: #3E3B61;
+    border-radius: 20px 0 0 20px;
+}
+.left-box a {
+    color: white;
+}
+.left-box-inner:first-child {
+    margin: 0px auto;
+    font-size: 2em;
+}
+.left-box-inner:last-child {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+}
+.right-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5%;
+    background-color: white;
+    border-radius: 0 20px 20px 0;
+}
+.form-class h1 {
+    margin-bottom: 2rem;
+}
+
+.form-outline {
+    margin: 1rem 0;
+}
+
+.form-class p {
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background-color: #3E3B61;
+}
+
+.btn-primary:hover {
+    background-color: #857BB9;
+}
+
+.btn-primary:focus {
+    background-color: #857BB9;
+}
+
+.form-notch-leading {
+    width: 9px;
+}
+
+.form-notch-middle {
+    width: 64.8px;
+}

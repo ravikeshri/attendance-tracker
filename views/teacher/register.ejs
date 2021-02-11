@@ -1,0 +1,61 @@
+<%- include("../partials/header") %>
+
+<body>
+    <div class="row container-box">
+        <div class="col-4 left-box">
+            <div class="left-box-inner"><a href="/"><h1>Attendance Tracker</h1></a></div>
+            <div class="left-box-inner"><a href="/student/login"><h4>Student Login</h4></a></div>
+            
+        </div>
+        <div class="col-8 right-box">
+            <form action="/teacher/register" class="form-class">
+                <h1>Register as Teacher</h1>
+                <div class="form-outline">
+                    <input type="text" id="name" class="form-control " required>
+                    <label class="form-label" for="name">Full Name</label>
+                <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle" ></div><div class="form-notch-trailing"></div></div></div>
+                <div class="form-outline">
+                    <input type="text" id="username" class="form-control " required>
+                    <label class="form-label" for="username">Username</label>
+                <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle" ></div><div class="form-notch-trailing"></div></div></div>
+                <div class="form-outline">
+                    <input type="password" id="password" class="form-control " required>
+                    <label class="form-label" for="password" required>Password</label>
+                <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+                <div class="form-outline">
+                    <input type="password" id="password2" class="form-control " required>
+                    <label class="form-label" for="password2" required>Confirm Password</label>
+                <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+                <div class="form-outline">
+                    <input type="email" id="email" class="form-control " placeholder="example@domain.com" required>
+                    <label class="form-label" for="email" required>Email</label>
+                <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+                
+                <div class="form-outline mb-0 mt-0">
+                    <select id="department" class="form-control">
+                        <option value="">Department</option>
+                        <option value="csed">CSED</option>
+                        <option value="ece">ECE</option>
+                        <option value="ee">EE</option>
+                        <option value="eee">EEE</option>
+                        <option value="mechanical">Mechanical</option>
+                        <option value="civil">Civil</option>
+                        <option value="maths">Maths</option>
+                        <option value="na">NA</option>
+                    </select>
+                <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>        
+                
+                <div class="form-outline">
+                    <input type="phone" id="phone" class="form-control " placeholder="Ten Digit Phone Number" required>
+                    <label class="form-label" for="phone" required>Phone Number</label>
+                <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                <p>Already a Teacher? <a href="/teacher/login">Login</a> </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+
+<%- include("../partials/footer") %>
