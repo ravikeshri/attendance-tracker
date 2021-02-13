@@ -48,11 +48,12 @@ app.get("/teacher/register", function(req, res) {
     res.render("teacher/register");
 });
 
-app.post(":user/register", (req, res)=> {
-       if(student)
+app.post("/:user/register", (req, res)=> {
+    console.log(req.body);
+       if(req.params.user=='student')
        {
       const{name,username,password,password2,email,stream,department,phone}=req.body;
-      let error=[];
+      let errors=[];
       //check required fields
       if(!name||!username||!password||!password2||!email||!stream||!department||!phone)
       {
@@ -68,7 +69,8 @@ app.post(":user/register", (req, res)=> {
       
       if(errors.length>0)
       {
-        res.render('register',{
+          console.log(errors);
+        res.render(req.params.user+'/register',{
             errors,
             name,
             username,
