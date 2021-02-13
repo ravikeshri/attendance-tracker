@@ -1,5 +1,4 @@
 <%- include("../partials/header") %>
-
 <body>
     <div class="row container-box">
         <div class="col-4 left-box">
@@ -7,9 +6,13 @@
             <div class="left-box-inner"><a href="/teacher/login"><h4>Teacher Login</h4></a></div>
             
         </div>
+        
+        
         <div class="col-8 right-box">
-            <form action="" class="form-class">
+            
+            <form action="student/register" method="post" class="form-class"> 
                 <h1>Register as Student</h1>
+                <%  include( "../partials/messages")  %>
                 <div class="form-outline">
                     <input type="text" id="name" class="form-control " required>
                     <label class="form-label" for="name">Full Name</label>
