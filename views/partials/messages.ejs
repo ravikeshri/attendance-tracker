@@ -1,9 +1,40 @@
-<h1>test</h1>
 <% if(typeof errors!='undefined') { %>
  <% errors.forEach(function(error) { %>
-    <div >
-        <%= error.msg %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-<% }); %>
+      <div >
+            <%=error.msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+  
+      <% }); %>
  <% } %>   
+ <% if(success_msg!='') { %>
+      <div >
+            <%= success_msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      
+    
+<% } %>
+<% if(error_msg !='') { %>
+      <div >
+            <%= error_msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      
+<% } %> 
+<% if(error !='') { %>
+  <div >
+        <%= error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  
+<% } %> 
