@@ -1,18 +1,19 @@
 <%- include("../partials/header") %>
-<body>
+
+<div class="container-outer">
     <div class="row container-box">
         <div class="col-4 left-box">
             <div class="left-box-inner"><a href="/"><h1>Attendance Tracker</h1></a></div>
             <div class="left-box-inner"><a href="/teacher/login"><h4>Teacher Login</h4></a></div>
-            
         </div>
-        
         
         <div class="col-8 right-box">
             
             <form action="/student/register" method="post" class="form-class"> 
                 <h1>Register as Student</h1>
+
                 <%-  include( "../partials/messages")  %>
+                
                 <div class="form-outline">
                     <input type="text" name="name" id="name" class="form-control " required>
                     <label class="form-label" for="name">Full Name</label>
@@ -37,8 +38,8 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-outline mb-0 mt-0">  
-                            <select id="stream" name="stream"class="form-control">
-                                <option valus="">Stream</option>
+                            <select id="stream" name="stream"class="form-control" required>
+                                <option value="" disabled selected>Stream</option>
                                 <option value="mca">MCA</option>
                                 <option value="btech">BTech</option>
                                 <option value="mtech">MTech</option>
@@ -49,8 +50,8 @@
                     </div>
                     <div class="col-6">
                         <div class="form-outline mb-0 mt-0">
-                            <select id="department"name="department" class="form-control">
-                                <option value="">Department</option>
+                            <select id="department"name="department" class="form-control" required>
+                                <option value="" disabled selected>Department</option>
                                 <option value="csed">CSED</option>
                                 <option value="ece">ECE</option>
                                 <option value="ee">EE</option>
@@ -74,7 +75,12 @@
             </form>
         </div>
     </div>
-</body>
-
+</div>
+    
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.js"
+    ></script>
 
 <%- include("../partials/footer") %>

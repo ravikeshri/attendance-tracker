@@ -1,0 +1,74 @@
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+
+      <div class="container">
+        <div class="row card-container">
+          <div class="col-7">
+            <div class="row card-info shadow">
+              <div class="card-info-header">
+                <h2>Software Engineering</h2>
+              </div>
+              <div class="card-info-inner">
+                <h6>Code: CS1234</h6>
+                <h6>Studnts: 64</h6>
+              </div>
+              <div class="card-info-inner">
+                <h6>Stream: MCA</h6>
+                <h6>Department: CSED</h6>
+              </div>
+              <div class="card-info-inner">
+                <h5>By: Faculty Name</h5>
+                <p class="btn btn-sm btn-outline-primary ms-4">Joining Code</p>
+              </div>
+            </div>
+            <div class="row card-attendance">
+              <div class="row card-attendance-left shadow">
+                <div>
+                  <h4>My Status</h4>
+                  <h4>81%</h4>
+                </div>
+              </div>
+              <div class="row card-attendance-right shadow">
+                <h4>My Report</h4>
+                <form action="">
+                  <input type="date" id="from-date" name="from-date" class="form-control" />
+                  <p>TO</p>
+                  <input type="date" id="to-date" name="to-date" class="form-control" />
+                  <button type="submit" class="btn btn-primary">GO</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="row recent-attendance shadow">
+              <div class="recent-header">
+                <h4>Recent Attendance</h4>
+              </div>
+              <div class="recent-info">
+                <p>Feb 10, 2021</p>
+                <p>Present</p>
+              </div>
+              <div class="recent-info">
+                <p>Feb 08, 2021</p>
+                <p>Absent</p>
+              </div>
+              <div class="recent-info">
+                <p>Feb 05, 2021</p>
+                <p>Absent</p>
+              </div>
+              <div class="recent-info">
+                <p>Feb 04, 2021</p>
+                <p>Present</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.js"
+    ></script>
+
+<%- include("../partials/footer") %>

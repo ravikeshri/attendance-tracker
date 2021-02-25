@@ -1,0 +1,42 @@
+
+<!-- 
+
+    Pending:
+    1. Profile Popup
+    2. Logout URL
+    3. Dashboard URL
+
+ -->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <!-- Dashboard URL will go here-->
+        <a class="navbar-brand" href="/">Attendance Tracker</a>
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#dashboard-toggler"
+        aria-controls="dashboard-toggler"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        >
+        <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="dashboard-toggler">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item nav-name">
+            <a class="nav-link active" aria-current="page" href="#">Full Name</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/user/logout">Logout</a>
+            </li>
+
+        </ul>
+        </div>
+    </div>
+</nav>

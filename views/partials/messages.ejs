@@ -1,40 +1,33 @@
 <% if(typeof errors!='undefined') { %>
  <% errors.forEach(function(error) { %>
-      <div >
-            <%=error.msg %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          
-  
-      <% }); %>
- <% } %>   
- <% if(success_msg!='') { %>
-      <div >
-            <%= success_msg %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-      
-    
+      <div class="bg-danger text-white alert">
+          <%=error.msg %>
+          <button type="button" class="btn-close float-end" aria-label="Close" data-mdb-dismiss="alert"></button>
+        </div>
+        
+
+    <% }); %>
+<% } %>   
+
+<% if(success_msg!='') { %>
+    <div class="bg-success text-white alert">
+          <%= success_msg %>
+          <button type="button" class="btn-close float-end" aria-label="Close" data-mdb-dismiss="alert"></button>
+        </div>
 <% } %>
+
 <% if(error_msg !='') { %>
-      <div >
+      <div class="bg-danger text-white alert">
             <%= error_msg %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close float-end" aria-label="Close" data-mdb-dismiss="alert"></button>
           </div>
       
 <% } %> 
+
 <% if(error !='') { %>
-  <div >
+  <div class="bg-danger text-white alert">
         <%= error %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close float-end" aria-label="Close" data-mdb-dismiss="alert"></button>
       </div>
   
 <% } %> 

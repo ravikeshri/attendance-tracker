@@ -1,1 +1,100 @@
-<h1>This is Teacher dashboard</h1>
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+
+      <div class="container">
+        <div class="row card-container">
+            <div class="card-box" data-mdb-toggle="modal" data-mdb-target="#createClass">
+                <h2>Create Class</h2>
+                <i class="fas fa-plus-circle"></i>
+            </div>
+            <div class="card-box">
+              <h4>Software Engineering</h4>
+              <h5>CS1234</h5>
+              <p>Stream: MCA</p>
+              <p>Students: 86</p>
+            </div>
+            <div class="card-box">
+              <h4>Database Management System</h4>
+              <h5>CS1234</h5>
+              <p>Stream: MCA</p>
+              <p>Students: 86</p>
+            </div>
+            <div class="card-box">
+              <h4>Operating System</h4>
+              <h5>CS1234</h5>
+              <p>Stream: MCA</p>
+              <p>Students: 86</p>
+            </div>
+        </div>
+      </div>
+
+    <!-- Create Class Popup -->
+    <div
+      class="modal fade"
+      id="createClass"
+      tabindex="-1"
+      aria-labelledby="createClassLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createClassLabel">Create Class</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-mdb-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+            <form action="/teacher/class/new" method="POST">
+              <div class="form-outline mb-4">
+                <input type="text" id="create-name" name="name" class="form-control" required />
+                <label class="form-label" for="create-name">Class Name</label>
+              </div> 
+              <div class="form-outline mb-4">
+                <input type="text" id="create-code" name="code" class="form-control" required/>
+                <label class="form-label" for="create-code">Class Code</label>
+              </div>
+              <div class="form-outline mb-4">  
+                <select id="create-stream" name="stream" class="form-control" required>
+                    <option value="" selected disabled>Stream</option>
+                    <option value="mca">MCA</option>
+                    <option value="btech">BTech</option>
+                    <option value="mtech">MTech</option>
+                    <option value="msc">MSC</option>
+                    <option value="mba">MBA</option>
+                </select>
+              <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+              
+              <div class="form-outline mb-4">
+                <select id="create-department" name="department" class="form-control" required>
+                    <option value="" selected disabled>Department</option>
+                    <option value="csed">CSED</option>
+                    <option value="ece">ECE</option>
+                    <option value="ee">EE</option>
+                    <option value="eee">EEE</option>
+                    <option value="mechanical">Mechanical</option>
+                    <option value="civil">Civil</option>
+                    <option value="maths">Maths</option>
+                    <option value="na">NA</option>
+                </select>
+              <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+              
+              <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.js"
+    ></script>
+
+<%- include("../partials/footer") %>

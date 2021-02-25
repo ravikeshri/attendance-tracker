@@ -1,0 +1,183 @@
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+
+      <div class="container">
+        <div class="row card-container">
+          <div class="col-7">
+            <div class="row card-info shadow">
+              <div class="card-info-header">
+                <h2>Software Engineering</h2>
+              </div>
+              <div class="card-info-inner">
+                <h6>Code: CS1234</h6>
+                <h6>Studnts: 64</h6>
+              </div>
+              <div class="card-info-inner">
+                <h6>Stream: MCA</h6>
+                <h6>Department: CSED</h6>
+              </div>
+              <div class="card-info-inner">
+                <h5>By: Faculty Name</h5>
+                <span>
+                  <p class="btn btn-sm btn-outline-primary" data-mdb-toggle="modal" data-mdb-target="#updateClass">Edit</p>
+                  <p class="btn btn-sm btn-outline-primary ms-4">Joining Code</p>
+                  <form action="www.google.com" onsubmit="return confirm('Do yo really want to delete class?');">
+                    <button 
+                      type="submit" 
+                      class="btn btn-sm btn-danger ms-4" 
+                    > Delete </button>
+                  </form>
+                </span>
+                
+              </div>
+            </div>
+            <div class="row card-attendance">
+              <div class="row card-attendance-left shadow">
+                
+                <div data-mdb-toggle="modal" data-mdb-target="#takeAttendance">
+                  <h4>Take Attendance</h4>
+                  <i class="far fa-address-card"></i>
+                </div>
+              </div>
+              <div class="row card-attendance-right shadow">
+                <h4>Generate Report</h4>
+                <form action="">
+                  <input type="date" id="from-date" name="from-date" class="form-control" />
+                  <p>TO</p>
+                  <input type="date" id="to-date" name="to-date" class="form-control" />
+                  <button type="submit" class="btn btn-primary">GO</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="row students-list shadow">
+              <div class="students-header">
+                <h4>Students</h4>
+                <h4>Attendance</h4>
+              </div>
+              <div class="students-info">
+                <p>Tony Stark </p>
+                <p>74%</p>
+              </div>
+              <div class="students-info">
+                <p>Steve Rogers</p>
+                <p>31%</p>
+              </div>
+              <div class="students-info">
+                <p>Chris Evans</p>
+                <p>57%</p>
+              </div>
+              <div class="students-info">
+                <p>Harry Potter</p>
+                <p>33%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    <!-- Edit Class Popup -->
+    <div
+      class="modal fade"
+      id="updateClass"
+      tabindex="-1"
+      aria-labelledby="updateClassLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateClassLabel">Edit Class</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-mdb-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+            <form action="">
+              <div class="form-outline mb-4">
+                <input type="text" id="create-name" name="name" class="form-control" value="Software Engineering" />
+                <label class="form-label" for="create-name">Class Name</label>
+              </div> 
+              <div class="form-outline mb-4">
+                <input type="text" id="create-code" name="code" class="form-control" value="CS1234" />
+                <label class="form-label" for="create-code">Class Code</label>
+              </div>
+              <div class="form-outline mb-4">  
+                <select id="create-stream" name="stream" class="form-control" value="mca">
+                    <option valus="">Stream</option>
+                    <option value="mca">MCA</option>
+                    <option value="btech">BTech</option>
+                    <option value="mtech">MTech</option>
+                    <option value="msc">MSC</option>
+                    <option value="mba">MBA</option>
+                </select>
+              <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+              
+              <div class="form-outline mb-4">
+                <select id="create-department" name="department" class="form-control" value="csed">
+                    <option value="">Department</option>
+                    <option value="csed">CSED</option>
+                    <option value="ece">ECE</option>
+                    <option value="ee">EE</option>
+                    <option value="eee">EEE</option>
+                    <option value="mechanical">Mechanical</option>
+                    <option value="civil">Civil</option>
+                    <option value="maths">Maths</option>
+                    <option value="na">NA</option>
+                </select>
+              <div class="form-notch"><div class="form-notch-leading"></div><div class="form-notch-middle"></div><div class="form-notch-trailing"></div></div></div>
+              
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Attendance Popup -->
+    <div
+      class="modal fade"
+      id="takeAttendance"
+      tabindex="-1"
+      aria-labelledby="takeAttendanceLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="takeAttendanceLabel">Take Attendance</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-mdb-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+            <form action="">
+              <div class="mb-4">
+                <label for="attendance-date">Date</label>
+                <input type="date" id="attendance-date" name="date" class="form-control" />
+              </div>
+            
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.js"
+    ></script>
+
+<%- include("../partials/footer") %>
