@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-
+const {ensureAuthenticated} = require('../config/auth2');
 // Load models
 const User = require('../models/user');
 const Class = require('../models/class');
 
 // Load teacher dashboard
-router.get("/dashboard", function(req,res){
+router.get("/dashboard",ensureAuthenticated, function(req,res){
     res.render("teacher/dashboard");
 });
 

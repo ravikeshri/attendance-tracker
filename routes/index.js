@@ -76,7 +76,7 @@ router.post("/:user/register", (req, res)=> {
                 {
                     
                     errors.push({msg:'username already exist'})
-                    if(isTeacher==true)
+                    if(user.isTeacher==true)
                     {
                     res.render(req.params.user+'/register',{
                         errors,
@@ -101,7 +101,7 @@ router.post("/:user/register", (req, res)=> {
                         department,
                         phone
                     });
-                    console.log(newUser);
+                   // console.log(newUser);
                     //hash password
                     bcrypt.genSalt(10,(err,salt) =>
                       bcrypt.hash(newUser.password,salt,(err,hash)=>
@@ -162,7 +162,7 @@ router.post("/:user/register", (req, res)=> {
                 if(user)
                 {
                     errors.push({msg:'username already exist'})
-                    if(isTeacher==false)
+                    if(user.isTeacher==false)
                     {
                     res.render(req.params.user+'/register',{
                         errors,
@@ -212,7 +212,7 @@ router.post("/:user/register", (req, res)=> {
 
 //login Handle
 router.post('/:user/login',(req,res,next) => {
-    console.log(req.body);
+   // console.log(req.body);
     if(req.params.user=='student')
     {
 
@@ -235,6 +235,15 @@ router.post('/:user/login',(req,res,next) => {
 // Logout route
 // router.get("/user/logout", function(req, res) {
 //     // logout user and redirect to "/"
+  router.get('/user/logout',(req,res)=>{
+      
+     req.logout();
+    req.flash('success_msg','you are logged out ');
+    res.redirect("/student/login");
+ });
+  
+
+  
 
 
 // });
