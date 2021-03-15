@@ -12,7 +12,7 @@ router.get("/dashboard", ensureAuthenticated,function(req,res){
 });
 
 // Load student class
-router.get("/class/:cid", function(req,res){
+router.get("/class/:cid", ensureAuthenticated, function(req,res){
     res.render("student/class");
 });
 

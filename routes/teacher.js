@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const {ensureAuthenticated} = require('../config/auth2');
+const {ensureAuthenticated, forwardAuthenticated} = require('../config/auth2');
 // Load models
 const User = require('../models/user');
 const Class = require('../models/class');
 
 // Load teacher dashboard
-router.get("/dashboard",ensureAuthenticated, function(req,res){
+router.get("/dashboard", ensureAuthenticated, function(req,res){
     res.render("teacher/dashboard");
 });
 
 // POST route to create new class
-router.post("/class/new", function(req, res) {
+router.post("/class/new", ensureAuthenticated, function(req, res) {
     // find the current user in User Model (req.user._id)
     // if he is teacher
     // then create class in Class model (req.body) 
@@ -40,9 +40,10 @@ router.post("/class/new", function(req, res) {
                     }
                     else {
                         user.classes.push(cls._id);
-                        Class.save();
-                        User.save();
-                        res.redirect("/teacher/dashboard", {success_msg: "Class Created"});
+                        cls.save();
+                        user.save();
+                        req.flash("success_msg", "Class Created");
+                        res.redirect("/teacher/dashboard");
                     }
                 });
 
@@ -53,7 +54,7 @@ router.post("/class/new", function(req, res) {
 });
 
 // Load teacher class
-router.get("/class/:cid", function(req,res){
+router.get("/class/:cid", ensureAuthenticated, function(req,res){
     res.render("teacher/class");
 });
 

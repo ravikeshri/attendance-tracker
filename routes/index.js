@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const forwardAuthenticated = require('../config/auth').forwardAuthenticated;
+const forwardAuthenticated2 = require('../config/auth2').forwardAuthenticated;
 
 // Load User model
 const User = require('../models/user');
+const { ensureAuthenticated } = require('../config/auth2');
 
 router.get("/", function(req, res) {
     // landing page yet to be created
@@ -13,23 +16,23 @@ router.get("/", function(req, res) {
 });
 
 // load login pages
-router.get("/student/login", function(req, res) {
+router.get("/student/login", forwardAuthenticated, function(req, res) {
     res.render("student/login");
 });
-router.get("/teacher/login", function(req, res) {
+router.get("/teacher/login", forwardAuthenticated2, function(req, res) {
     res.render("teacher/login");
 });
 
 // load register pages
-router.get("/student/register", function(req, res) {
+router.get("/student/register", forwardAuthenticated, function(req, res) {
     res.render("student/register");
 });
-router.get("/teacher/register", function(req, res) {
+router.get("/teacher/register", forwardAuthenticated2, function(req, res) {
     res.render("teacher/register");
 });
 
 // post route to register user
-router.post("/:user/register", (req, res)=> {
+router.post("/:user/register", forwardAuthenticated, (req, res)=> {
     // if user is teacher
     // save user and redirect to teacher login
     // if user is student
@@ -211,41 +214,45 @@ router.post("/:user/register", (req, res)=> {
 });
 
 //login Handle
-router.post('/:user/login',(req,res,next) => {
+router.post('/:user/login', forwardAuthenticated, (req,res,next) => {
    // console.log(req.body);
-    if(req.params.user=='student')
-    {
+    User.findOne({username: req.body.username}, function(err, user) {
+        if(err) {
+            console.log(err);
+            res.redirect("/");
+        } else {
+            if(user.isTeacher && req.params.user=='teacher') {
+                passport.authenticate('local' , {
+                    successRedirect:'/teacher/dashboard',
+                    failureRedirect:'/teacher/login',
+                    failureFlash:true
+                })(req,res,next);
 
-    passport.authenticate('local' , {
-        successRedirect:'/student/dashboard',
-        failureRedirect:'/student/login',
-        failureFlash:true
-    })(req,res,next);
-    }
-    else
-    {
-    passport.authenticate('local' , {
-        successRedirect:'/teacher/dashboard',
-        failureRedirect:'/teacher/login',
-        failureFlash:true
-        })(req,res,next);
-    }
+            } else if(!user.isTeacher && req.params.user=='student') {
+                passport.authenticate('local' , {
+                    successRedirect:'/student/dashboard',
+                    failureRedirect:'/student/login',
+                    failureFlash:true
+                })(req,res,next);
+
+            } else {
+                req.flash("error_msg", "Invalid username or password");
+                res.redirect("back");
+            }
+        }
+    });
 });
 
 // Logout route
 // router.get("/user/logout", function(req, res) {
 //     // logout user and redirect to "/"
-  router.get('/user/logout',(req,res)=>{
+  router.get('/user/logout', ensureAuthenticated, (req,res)=>{
       
-     req.logout();
+    req.logout();
     req.flash('success_msg','you are logged out ');
     res.redirect("/student/login");
  });
   
-
-  
-
-
 // });
 
 module.exports = router;
