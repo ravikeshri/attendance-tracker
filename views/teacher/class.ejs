@@ -6,18 +6,18 @@
           <div class="col-7">
             <div class="row card-info shadow">
               <div class="card-info-header">
-                <h2>Software Engineering</h2>
+                <h2> <%= cls.name %>  </h2>
               </div>
               <div class="card-info-inner">
-                <h6>Code: CS1234</h6>
-                <h6>Studnts: 64</h6>
+                <h6>Code: <%= cls.code %>  </h6>
+                <h6>Studnts: <%= cls.students.length %>  </h6>
               </div>
               <div class="card-info-inner">
-                <h6>Stream: MCA</h6>
-                <h6>Department: CSED</h6>
+                <h6>Stream: <%= cls.stream.toUpperCase() %>  </h6>
+                <h6>Department: <%= cls.department.toUpperCase() %>  </h6>
               </div>
               <div class="card-info-inner">
-                <h5>By: Faculty Name</h5>
+                <h5>By: <%= teacher.name %> </h5>
                 <span>
                   <p class="btn btn-sm btn-outline-primary" data-mdb-toggle="modal" data-mdb-target="#updateClass">Edit</p>
                   <p class="btn btn-sm btn-outline-primary ms-4">Joining Code</p>
@@ -56,6 +56,15 @@
                 <h4>Students</h4>
                 <h4>Attendance</h4>
               </div>
+
+              <% students.forEach(student => { %>
+                <div class="students-info" id="<%= student.id %> ">
+                  <p><%= student.name %></p>
+                  <p><%= student.attendance %>%</p>
+                </div>
+              <% }); %>
+
+              
               <div class="students-info">
                 <p>Tony Stark </p>
                 <p>74%</p>

@@ -1,31 +1,20 @@
 <%- include("../partials/header") %>
 <%- include("../partials/navbar") %>
-
+<%- include("../partials/messages") %>
       <div class="container">
         <div class="row card-container">
             <div class="card-box" data-mdb-toggle="modal" data-mdb-target="#createClass">
                 <h2>Create Class</h2>
                 <i class="fas fa-plus-circle"></i>
             </div>
-            <div class="card-box">
-              <%- include("../partials/messages") %>
-              <h4>Software Engineering</h4>
-              <h5>CS1234</h5>
-              <p>Stream: MCA</p>
-              <p>Students: 86</p>
-            </div>
-            <div class="card-box">
-              <h4>Database Management System</h4>
-              <h5>CS1234</h5>
-              <p>Stream: MCA</p>
-              <p>Students: 86</p>
-            </div>
-            <div class="card-box">
-              <h4>Operating System</h4>
-              <h5>CS1234</h5>
-              <p>Stream: MCA</p>
-              <p>Students: 86</p>
-            </div>
+            <% for( let i = 0; i < classes.length; i++ ) { %>
+              <div onclick="location.href='/teacher/class/'+'<%= classes[i]._id %>';" class="card-box">
+                <h4> <%= classes[i].name %>  </h4>
+                <h5> <%= classes[i].code %>  </h5>
+                <p>Stream: <%= classes[i].stream %>  </p>
+                <p>Students: <%= classes[i].students.length %>  </p>
+              </div> 
+            <% } %>
         </div>
       </div>
 

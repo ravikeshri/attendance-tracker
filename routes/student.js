@@ -16,4 +16,14 @@ router.get("/class/:cid", ensureAuthenticated, function(req,res){
     res.render("student/class");
 });
 
+// new class join
+router.post("/class/join", ensureAuthenticated, function(req,res) {
+    // req.body.code
+    // find the class by code (id)
+    // add student to the class and add class to student's class list
+    // i)  cls.students.push ({id: req.user, attendance: []})
+    // ii) req.user.classes.push(req.body.code)
+
+});
+
 module.exports = router;

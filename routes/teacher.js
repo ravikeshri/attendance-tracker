@@ -7,7 +7,23 @@ const Class = require('../models/class');
 
 // Load teacher dashboard
 router.get("/dashboard", ensureAuthenticated, function(req,res){
-    res.render("teacher/dashboard");
+    // check if current user is teacher
+    // then find his all class and load dashboard
+    if(req.user.isTeacher) {
+        Class.find().where('_id').in(req.user.classes).exec((err, classes) => {
+            if(err) {
+                console.log(err);
+                req.logout();
+                res.redirect("/teacher/login");
+            } else {
+                res.render("teacher/dashboard", {classes: classes, user: req.user});
+            }
+        });
+    } else {
+        req.logout();
+        req.flash("error_msg", "Invalid Username or Password!");
+        res.render("teacher/login");
+    }
 });
 
 // POST route to create new class
@@ -55,7 +71,51 @@ router.post("/class/new", ensureAuthenticated, function(req, res) {
 
 // Load teacher class
 router.get("/class/:cid", ensureAuthenticated, function(req,res){
-    res.render("teacher/class");
+    // find the class
+    // and load the class with all details
+    Class.findById(req.params.cid, function(err, cls) {
+        if(err) {
+            console.log(err);
+            res.redirect("/teacher/dashboard");
+        } else {
+            User.findById(cls.teacher, function(err, teacher) {
+                if(err) {
+                    console.log(err);
+                    res.redirect("/teacher/dashboard");
+                } else {
+                    // load class with following data 
+                    // (1) students info : name, registrationNo, email, department, stream, phone, attendance
+                    // (2) class info : cls
+                    // (3) teacher info : teacher
+                    // (4) current logged in user : user (here teacher itself is current logged in user)
+
+                    var students = [];
+                    cls.students.forEach(student => {
+                        var att = student.attendance.length / cls.dates.length;
+                        User.findById(student.id, function(err, student) {
+                            if(err) {
+                                console.log(err);
+                                res.redirect("/teacher/dashboard");
+                            } else {
+                                var temp = {
+                                    id: student._id,
+                                    name: student.name,
+                                    regd: student.username,
+                                    email: student.email,
+                                    department: student.department,
+                                    stream: student.stream,
+                                    phone: student.phone,
+                                    attendance: att
+                                };
+                                students.push(temp);
+                            }
+                        });
+                    });
+                    res.render("teacher/class", {students: students, cls: cls, teacher: teacher, user: req.user});
+                }
+            });
+        }
+    });
 });
 
 module.exports = router;
