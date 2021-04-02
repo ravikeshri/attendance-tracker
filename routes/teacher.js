@@ -13,7 +13,7 @@ router.get("/dashboard", ensureAuthenticated, function(req,res){
         Class.find().where('_id').in(req.user.classes).exec((err, classes) => {
             if(err) {
                 console.log(err);
-                req.logout();
+                 req.logout();
                 res.redirect("/teacher/login");
             } else {
                 res.render("teacher/dashboard", {classes: classes, user: req.user});
