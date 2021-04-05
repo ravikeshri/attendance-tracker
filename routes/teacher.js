@@ -13,7 +13,7 @@ router.get("/dashboard", ensureAuthenticated, function(req,res){
         Class.find().where('_id').in(req.user.classes).exec((err, classes) => {
             if(err) {
                 console.log(err);
-                 req.logout();
+                req.logout();
                 res.redirect("/teacher/login");
             } else {
                 res.render("teacher/dashboard", {classes: classes, user: req.user});
@@ -116,6 +116,14 @@ router.get("/class/:cid", ensureAuthenticated, function(req,res){
             });
         }
     });
+});
+
+router.put("/class/:cid/edit", function(req, res) {
+    // if current user is teacher (req.user)
+    // find class by class id
+    // Class.findByIdAndUpdate(req.params.cid, fun(err, cls))
+    // cls.name = req.body.name , code, stream, department and then cls.save()
+    // redirect to same class
 });
 
 module.exports = router;
