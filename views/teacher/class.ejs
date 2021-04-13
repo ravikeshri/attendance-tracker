@@ -191,6 +191,22 @@
     <script>
       function copy_code()
       {
+        var currentURL = window.location;
+       var chars = currentURL.href.substr(-24);
+        alert(chars); // 12
+
+       // var url=document.getElementById("demo").innerHTML =  window.location.href;
+        //var copyText = document.getElementById("chars");
+        var dummy = document.createElement('input'),
+         text = chars;
+        document.body.appendChild(dummy);
+        dummy.value = chars;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        alert('Link copied please open whatsup and paste to send');
+
+
 
       }
     </script>
