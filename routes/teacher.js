@@ -90,29 +90,44 @@ router.get("/class/:cid", ensureAuthenticated, function (req, res) {
                     // (3) teacher info : teacher
                     // (4) current logged in user : user (here teacher itself is current logged in user)
 
-                    var students = [];
+                    var studentsIds = [];
                     cls.students.forEach(student => {
-                        var att = student.attendance.length / cls.dates.length;
-                        User.findById(student.id, function (err, student) {
-                            if (err) {
-                                console.log(err);
-                                res.redirect("/teacher/dashboard");
-                            } else {
-                                var temp = {
-                                    id: student._id,
-                                    name: student.name,
-                                    regd: student.username,
-                                    email: student.email,
-                                    department: student.department,
-                                    stream: student.stream,
-                                    phone: student.phone,
-                                    attendance: att
-                                };
-                                students.push(temp);
-                            }
-                        });
+                        studentsIds.push(student.id);
                     });
-                    res.render("teacher/class", { students: students, cls: cls, teacher: teacher, user: req.user });
+                    User.find().where('_id').in(studentsIds).exec((err, students) => {
+                        if(err) {
+                            console.log(err);
+                            res.redirect('/teacher/dashboard');
+                        } else {
+                            var newStudents = students.map(function(student) {
+                                
+                                var found = cls.students.find(function(val){return student._id.equals(val.id)});
+                                var attNum = found.attendance.length;
+                                var attDeno = cls.dates.length;
+                                var att = 0;
+                                if(attDeno != 0) att = (attNum / attDeno)*100;
+
+                                var tmpStudent = student.toObject();
+
+                                tmpStudent.percentage = att;
+                                tmpStudent.attendance = found.attendance;
+                                tmpStudent.regd = tmpStudent.username;
+                                delete tmpStudent.username;
+                                delete tmpStudent.password;
+                                return tmpStudent;
+                            });
+                            
+                            // console.log(newStudents);
+                            // sort students list by regd no.
+                            newStudents.sort(function(a, b) {
+                                var x = a.regd; var y = b.regd;
+                                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                            });
+                            res.render("teacher/class", { students: newStudents, cls: cls, teacher: teacher, user: req.user });
+                        }
+                    });
+                    
+                    
                 }
             });
         }
@@ -180,9 +195,40 @@ router.delete("/class/:cid/delete", function (req, res) {
                 req.user.save();
                 res.redirect("/teacher/dashboard");
             }
-        })
+        });
     }
+});
 
+// POST route to record attendance
+router.post("/class/:cid/attendance", function(req, res) {
+    // find the class
+    // then mark the attendance for each student
+    Class.findById(req.params.cid, function(err, cls) {
+        if(err) {
+            console.log(err);
+            res.redirect("/teacher/dashboard");
+        } else {
 
-})
+            // if attendance is not recorded before
+            // add current date to dates array
+            // as well as to students attendance array
+
+            var currDate = new Date(req.body.date);
+
+            var check = cls.dates.findIndex(function(val){return currDate.toString() == val});
+            if(check == -1) {
+                cls.dates.push(req.body.date);
+                cls.students.forEach(function(student) {
+                    if(req.body.att.hasOwnProperty(student.id)) {
+                        student.attendance.push(req.body.date);
+                    }
+                });
+                cls.save();
+                req.flash("success_msg", "Attendance Recorded");
+                res.redirect("/teacher/class/"+req.params.cid);
+            } else res.redirect("/teacher/class/"+req.params.cid);
+        }
+    });
+});
+
 module.exports = router;

@@ -1,5 +1,6 @@
 <%- include("../partials/header") %>
 <%- include("../partials/navbar") %>
+<%- include("../partials/messages") %>
 
       <div class="container">
         <div class="row card-container">
@@ -10,7 +11,7 @@
               </div>
               <div class="card-info-inner">
                 <h6>Code: <%= cls.code %>  </h6>
-                <h6>Studnts: <%= cls.students.length %>  </h6>
+                <h6>Students: <%= cls.students.length %>  </h6>
               </div>
               <div class="card-info-inner">
                 <h6>Stream: <%= cls.stream.toUpperCase() %>  </h6>
@@ -60,27 +61,10 @@
               <% students.forEach(student => { %>
                 <div class="students-info" id="<%= student.id %> ">
                   <p><%= student.name %></p>
-                  <p><%= student.attendance %>%</p>
+                  <p><%= student.percentage.toFixed(2) %>%</p>
                 </div>
               <% }); %>
 
-              
-              <div class="students-info">
-                <p>Tony Stark </p>
-                <p>74%</p>
-              </div>
-              <div class="students-info">
-                <p>Steve Rogers</p>
-                <p>31%</p>
-              </div>
-              <div class="students-info">
-                <p>Chris Evans</p>
-                <p>57%</p>
-              </div>
-              <div class="students-info">
-                <p>Harry Potter</p>
-                <p>33%</p>
-              </div>
             </div>
           </div>
         </div>
@@ -170,13 +154,36 @@
           </div>
           <div class="modal-body">
 
-            <form action="">
+            <form action="/teacher/class/<%=cls._id%>/attendance" method="POST">
               <div class="mb-4">
                 <label for="attendance-date">Date</label>
-                <input type="date" id="attendance-date" name="date" class="form-control" />
+                <input type="date" id="attendance-date" name="date" class="form-control" onchange="date_check()" required/>
               </div>
-            
-              <button type="submit" class="btn btn-primary">Submit</button>
+           
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Registration No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Present?</th>
+                  </tr>
+                </thead>
+                <h6 class="text-danger text-center" id="att-form-error" style="display: none;">Attendance Already Taken!</h6>
+                <tbody id="att-form-body">
+                    <% var count = 1; %> 
+                    <% students.forEach(student => { %>
+                      <tr>
+                        <th scope="row"><%= count++ %></th>
+                        <td><%= student.regd.toUpperCase() %> </td>
+                        <td><%= student.name %></td>
+                        <td><input type="checkbox" class="form-check-input" name="att[<%= student._id %>]" id=""></td>
+                      </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+
+              <button type="submit" class="btn btn-primary" id="att-form-submit">Submit</button>
             </form>
 
           </div>
@@ -188,26 +195,11 @@
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.js"
     ></script>
+    <script src="/js/jquery-3.4.1.min.js"></script>
     <script>
-      function copy_code()
-      {
-        var currentURL = window.location;
-       var chars = currentURL.href.substr(-24);
-        alert(chars); // 12
-
-       // var url=document.getElementById("demo").innerHTML =  window.location.href;
-        //var copyText = document.getElementById("chars");
-        var dummy = document.createElement('input'),
-         text = chars;
-        document.body.appendChild(dummy);
-        dummy.value = chars;
-        dummy.select();
-        document.execCommand('copy');
-        document.body.removeChild(dummy);
-        alert('Link copied please open whatsup and paste to send');
-
-
-
-      }
+      let cls = <%- JSON.stringify(cls) %>;
+      let students = <%- JSON.stringify(students) %>;
     </script>
+    <script src="/js/script.js"></script>
+
 <%- include("../partials/footer") %>

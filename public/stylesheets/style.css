@@ -283,7 +283,9 @@ body {
 .students-info:last-child {
     border-bottom: none;
 }
-
+.btn-primary.disabled {
+    background-color: #434446;
+}
 /*
 ************ Student Dashboard ***************
 */
