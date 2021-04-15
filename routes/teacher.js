@@ -134,6 +134,7 @@ router.get("/class/:cid", ensureAuthenticated, function (req, res) {
     });
 });
 
+// route to edit class
 router.put("/class/:cid/edit", function (req, res) {
 
     // if current user is teacher (req.user)

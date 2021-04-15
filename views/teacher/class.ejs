@@ -4,7 +4,7 @@
 
       <div class="container">
         <div class="row card-container">
-          <div class="col-7">
+          <div class="col-lg-7">
             <div class="row card-info shadow">
               <div class="card-info-header">
                 <h2> <%= cls.name %>  </h2>
@@ -20,8 +20,8 @@
               <div class="card-info-inner">
                 <h5>By: <%= teacher.name %> </h5>
                 <span>
-                  <p class="btn btn-sm btn-outline-primary" data-mdb-toggle="modal" data-mdb-target="#updateClass">Edit</p>
-                  <button class="btn btn-sm btn-outline-primary ms-4"onclick="copy_code()">Joining Code</button>
+                  <button class="btn btn-sm btn-outline-primary" data-mdb-toggle="modal" data-mdb-target="#updateClass">Edit</button>
+                  <button class="btn btn-sm btn-outline-primary ms-4" onclick="copy_code()">Joining Code</button>
                   <form action="/teacher/class/<%=cls._id%>/delete?_method=delete"method="POST" onsubmit="return confirm('Do yo really want to delete class?');">
                     <button 
                       type="submit" 
@@ -42,16 +42,17 @@
               </div>
               <div class="row card-attendance-right shadow">
                 <h4>Generate Report</h4>
-                <form action="">
-                  <input type="date" id="from-date" name="from-date" class="form-control" />
+                <form id="report">
+                  <p class="text-danger text-center" id="report-error" style="display: none;">Select Valid Range!</p>
+                  <input type="date" id="from-date" name="from-date" class="form-control" required/>
                   <p>TO</p>
-                  <input type="date" id="to-date" name="to-date" class="form-control" />
+                  <input type="date" id="to-date" name="to-date" class="form-control" required/>
                   <button type="submit" class="btn btn-primary">GO</button>
                 </form>
               </div>
             </div>
           </div>
-          <div class="col-5">
+          <div class="col-lg-5">
             <div class="row students-list shadow">
               <div class="students-header">
                 <h4>Students</h4>
@@ -190,6 +191,11 @@
         </div>
       </div>
     </div>
+
+    
+        
+        
+      
       
     <script
     type="text/javascript"

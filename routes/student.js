@@ -22,7 +22,11 @@ router.get("/dashboard", ensureAuthenticated,function(req,res){
                 classes.forEach(cls => {
                     for(var i=0; i<cls.students.length; i++) {
                         if(req.user._id.equals(cls.students[i].id)) {
-                            var att = cls.students[i].attendance.length / cls.dates.length;
+                            var att = 0;
+                            
+                            if(cls.dates.length != 0) {
+                                att = cls.students[i].attendance.length / cls.dates.length;
+                            }
                             classData.push({cls: cls, att: Number(att)*100});
                             break;
                         }
@@ -40,7 +44,35 @@ router.get("/dashboard", ensureAuthenticated,function(req,res){
 
 // Load student class
 router.get("/class/:cid", ensureAuthenticated, function(req,res){
-    res.render("student/class");
+    // find the class
+    // and load the class with all details
+    Class.findById(req.params.cid, function (err, cls) {
+        if (err) {
+            console.log(err);
+            res.redirect("/teacher/dashboard");
+        } else {
+            User.findById(cls.teacher, function (err, teacher) {
+                if (err) {
+                    console.log(err);
+                    res.redirect("/teacher/dashboard");
+                } else {
+                    var stu = cls.students.find(function(val){ return req.user._id.equals(val.id)} );
+                    var student = req.user;
+                    student.attendance = stu.attendance;
+                    student.regd = student.username;
+                    student.percentage = (cls.dates.length == 0) ? 0 : (student.attendance.length / cls.dates.length)*100;
+                    delete student.username;
+                    delete student.password;
+                    cls.dates.sort(function(a,b) {
+                        var x = new Date(a);
+                        var y = new Date(b);
+                        return x.getTime() - y.getTime();
+                    });
+                    res.render("student/class", {cls: cls, student: student, teacher: teacher, user: req.user});
+                }
+            });
+        }
+    });
 });
 
 // new class join

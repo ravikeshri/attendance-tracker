@@ -96,6 +96,34 @@ body {
 .alert {
     padding: 5px 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .left-box {
+        height: 200px;
+        border-radius: 20px;
+    }
+    .left-box-inner:last-child {
+        bottom: 20px;
+    }
+    .right-box {
+        border-radius: 20px;
+    }
+} 
+
+@media screen and (max-width: 427px) {
+    .left-box {
+        height: 200px;
+        border-radius: 20px;
+    }
+    .left-box-inner:last-child {
+        bottom: 10px;
+        left: 70px;
+    }
+    .right-box {
+        border-radius: 20px;
+    }
+} 
+
 /*
 ********   Navbar   ********
 */
@@ -286,6 +314,26 @@ body {
 .btn-primary.disabled {
     background-color: #434446;
 }
+@media screen and (max-width: 991px) {
+    .card-info-inner {
+        flex-direction: column;
+    }
+    .card-info-inner span {
+        margin-top: 20px;
+    }
+    .card-attendance-left, .card-attendance-right {
+        max-width: 100%;
+        margin-bottom: 35px;
+    }
+    .students-list, .card-info {
+        padding: 30px 25px;
+    }
+    .students-list {
+        margin-right: 10px;
+    }
+}
+
+
 /*
 ************ Student Dashboard ***************
 */
@@ -308,15 +356,15 @@ body {
 /*
 ************ Student Class ***************
 */
-.recent-attendance {
+.my-report-attendance {
     padding: 30px 40px;
     border-radius: 10px;
     background-color: white;
 }
-.recent-header {
+.my-report-header {
     border-bottom: 2px solid #3E3B61;
 }
-.recent-info {
+.my-report-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -324,6 +372,19 @@ body {
     border-bottom: 0.1px solid #3E3B61;
     cursor: pointer;
 }
-.recent-info:last-child {
+.my-report-info:last-child {
     border-bottom: none;
 }
+
+@media screen and (max-width: 991px) {
+    .my-report-attendance {
+        margin-right: 10px;
+    }
+    .my-report-attendance, .card-info {
+        padding: 30px 25px;
+    }
+    #jc {
+        display: none;
+    }
+} 
+

@@ -3,63 +3,55 @@
 
       <div class="container">
         <div class="row card-container">
-          <div class="col-7">
+          <div class="col-lg-7">
             <div class="row card-info shadow">
               <div class="card-info-header">
-                <h2>Software Engineering</h2>
+                <h2><%= cls.name %> </h2>
               </div>
               <div class="card-info-inner">
-                <h6>Code: CS1234</h6>
-                <h6>Studnts: 64</h6>
+                <h6>Code: <%= cls.code %> </h6>
+                <h6>Studnts: <%= cls.students.length %> </h6>
               </div>
               <div class="card-info-inner">
-                <h6>Stream: MCA</h6>
-                <h6>Department: CSED</h6>
+                <h6>Stream: <%= cls.stream.toUpperCase() %> </h6>
+                <h6>Department: <%= cls.department.toUpperCase() %> </h6>
               </div>
               <div class="card-info-inner">
-                <h5>By: Faculty Name</h5>
-                <p class="btn btn-sm btn-outline-primary ms-4">Joining Code</p>
+                <h5>By: <%= teacher.name %> </h5>
+                <p class="btn btn-sm btn-outline-primary ms-4" id="jc" onclick="copy_code()">Joining Code</p>
               </div>
             </div>
             <div class="row card-attendance">
               <div class="row card-attendance-left shadow">
                 <div>
                   <h4>My Status</h4>
-                  <h4>81%</h4>
+                  <h4><%= student.percentage.toFixed(2) %>%</h4>
                 </div>
               </div>
               <div class="row card-attendance-right shadow">
-                <h4>My Report</h4>
-                <form action="">
-                  <input type="date" id="from-date" name="from-date" class="form-control" />
-                  <p>TO</p>
-                  <input type="date" id="to-date" name="to-date" class="form-control" />
-                  <button type="submit" class="btn btn-primary">GO</button>
-                </form>
+                <h1 class="mt-2"><i class="far fa-address-card"></i></h1 class="mt-2">
               </div>
             </div>
           </div>
-          <div class="col-5">
-            <div class="row recent-attendance shadow">
-              <div class="recent-header">
-                <h4>Recent Attendance</h4>
+          <div class="col-lg-5">
+            <div class="row my-report-attendance shadow">
+              <div class="my-report-header">
+                <h4>My Report</h4>
               </div>
-              <div class="recent-info">
-                <p>Feb 10, 2021</p>
-                <p>Present</p>
-              </div>
-              <div class="recent-info">
-                <p>Feb 08, 2021</p>
-                <p>Absent</p>
-              </div>
-              <div class="recent-info">
-                <p>Feb 05, 2021</p>
-                <p>Absent</p>
-              </div>
-              <div class="recent-info">
-                <p>Feb 04, 2021</p>
-                <p>Present</p>
-              </div>
+              <% cls.dates.forEach(date => {  
+                var d = new Date(date); 
+              %>
+                <div class="my-report-info">
+                <p><%=d.toDateString()%></p>
+              <%
+                var check = student.attendance.findIndex(function(val){return val.getTime() == date.getTime()});
+                if(check != -1) { %> 
+                  <p>Present</p>
+                <% } else { %>
+                  <p>Absent</p>
+                <% } %>
+                  </div>
+              <% }); %>
             </div>
           </div>
         </div>
@@ -70,5 +62,10 @@
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.js"
     ></script>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script>
+      
+    </script>
+    <script src="/js/script.js"></script>
 
 <%- include("../partials/footer") %>

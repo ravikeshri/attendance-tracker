@@ -18,16 +18,10 @@
             <% classes.forEach(cls => { %>
               <div onclick="location.href='/student/class/'+'<%= cls.cls._id %>';" class="card-box">
                 <h4> <%= cls.cls.name %>  </h4>
-                <h5> <%= cls.cls.code %>  </h5>
-                <h5> <%= cls.att %>  </h5>
+                <h6> Code: <%= cls.cls.code %>  </h6>
+                <h5> <%= cls.att.toFixed(2) %>%</h5>
               </div>
             <% }) %>
-
-            <!-- <div class="card-box">
-              <h4>Software Engineering</h4>
-              <h5>CS1234</h5>
-              <h5>76%</h5>
-            </div> -->
         </div>
       </div>
 
